@@ -10,7 +10,12 @@
 - [ ] Friends to enjoy the bot with 
 
 ## How-to:
-TODO
+1. Download MariscoBot from Github
+2. Do ```npm install``` inside the MariscoBot folder
+3. Edit Marisa.js with your Discord and Youtube keys
+4. Run ```nodejs Marisa.js```
+5. Enjoy!
+6. Report any bugs you may find
 
 ## Documentation
 The bot explains itself
