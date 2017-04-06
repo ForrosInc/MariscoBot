@@ -18,4 +18,4 @@
 6. Report any bugs you may find
 
 ## Documentation
-The bot explains itself
+The bot explains itself.
