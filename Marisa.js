@@ -76,6 +76,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   console.log(msg);
+  if (msg.content === "/dumpguildid") console.log("Guild ID is " + msg.guild.id + "\n");
   if (msg.content === MTalk[LANG]) msg.reply(MNoises[LANG]);
   if (msg.content === MSali[LANG]) msg.reply(MAngry[LANG]);
   if (msg.content === MMarisa[LANG]) msg.reply(MPMari[LANG]);
