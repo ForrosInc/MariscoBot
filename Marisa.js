@@ -9,7 +9,7 @@ const testFolder3 = 'C:\\Users\\rasetti\\Downloads\\Touhou\\Memes&Art\\Drunktard
 const fs = require('fs');
 const readline = require('readline');
 var user_array = [];
-var tc;
+var tc = null;
 var rl = readline.createInterface({
   input: process.stdin,
   output: process.sdout
@@ -151,7 +151,12 @@ if(msg.content.indexOf(":v")!=-1)
 client.login('Discord key Here');
 
  rl.on('line', (input) => {
-  tc.sendMessage(`${input}`);
+   if(tc != null){
+      tc.sendMessage(`${input}`);
+   }
+   else{
+      console.log("There is no channel currently active\n");
+   }
 });
 
 function get_danbooru(tag) {
