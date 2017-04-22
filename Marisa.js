@@ -27,9 +27,8 @@ const streamOptions = { seek: 0, volume: 1 };
 var search = require('youtube-search');
 var optsyt = {
   maxResults: 1,
-  key: 'YTKeyHere'
-
-}; 
+  key: 'YTKeyHere' //Change this to your Youtube Key
+};
 
 var pho = Array;
 fs.readdir(testFolder, (err, files) => {
@@ -149,9 +148,9 @@ if(msg.content.indexOf(":v")!=-1)
 }
 
 });
-client.login('Discord key Here');
+client.login('Discord key Here'); //Change this to your Discord key
 
- rl.on('line', (input) => {
+rl.on('line', (input) => {
    if(tc != null){
       tc.sendMessage(`${input}`);
    }
