@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 //MariscoBot is under the GPL3+ License
 //Copyright (C) Bruno Rasetti and Salvador Pardiñas 2016-2017
 
