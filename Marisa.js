@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 //MariscoBot is under the GPL3+ License
 //Copyright (C) Bruno Rasetti and Salvador Pardiñas 2016-2017
 
@@ -20,14 +20,14 @@ var msg_to_reply;
 
 const SPANISH = 0;
 const ENGLISH = 1;
-var LANG = SPANISH;
+var LANG = ENGLISH;
 
 var ytdl = require('ytdl-core');
 const streamOptions = { seek: 0, volume: 1 };
 var search = require('youtube-search');
 var optsyt = {
   maxResults: 1,
-  key: 'YTKeyHere' //Change this to your Youtube Key
+  key: 'insertkeyhere' //Change this to your Youtube Key
 };
 
 var pho = Array;
@@ -61,13 +61,15 @@ var MSpread = ["#Extender Marisco", "#Spread Marisco"];
 var MWaifu = ["#Waifu", "#Waifu"];
 var MMokou = ["#Mokou", "#Mokou"];
 var MHelp = ["#ayuda", "#help"];
-var MCmds = ['Saludos mortales, los comandos son:\n"#Habla" para hacer que el Marisco te responda\n"#SALI BICHO" para que el Marisco te responda de forma agresiva\n"#Marisa" para alabar a Marisa\n"#Hecatia" para que el Marisco reconozca a su enemigo natural\n"#OHIO" para saludar al Marisco\n"#Dango" para alimentar al Marisco\n"#Extender Marisco" para esparcir el virus\n"#Waifu" para que el Marisco clarifique cual es la mejor waifu\n"#Mokou" para que el Marisco invoque memes chinos con traducciones defectuosas\n"M-play" para que el Marisco se mande un alto cumbion\nY "Danbooru:(Tag de danbooru)" para que el Marisco postee waifus en pelotas(NSFW)', 'Greetings mortals, the commands are as follows:\n"#Talk" to make Marisco answer\n"#OUTBEAST" to make Marisco angry at you\n"#Marisa" to hail Marisa\n"Hecatia" to make Marisco recognize her natural enemy\n"#OHIO" to greet Marisco\n"#Dango" to feed Marisco\n"#Spread Marisco" to spread the virus\n"#Waifu" to make Marisco clarify who\'s the best waifu\n"#Mokou" to make Marisco invoke chinkmemes with awful translations\n"M-play" to make Marisco play some nice traps\nAnd "Danbooru: (Danbooru tag)" to make Marisco send waifu nudes(NSFW)']
+var MCmds = ['Saludos mortales, los comandos son:\n"#Habla" para hacer que el Marisco te responda\n"#SALI BICHO" para que el Marisco te responda de forma agresiva\n"#Marisa" para alabar a Marisa\n"#Hecatia" para que el Marisco reconozca a su enemigo natural\n"#OHIO" para saludar al Marisco\n"#Dango" para alimentar al Marisco\n"#Extender Marisco" para esparcir el virus\n"#Waifu" para que el Marisco clarifique cual es la mejor waifu\n"#Mokou" para que el Marisco invoque memes chinos con traducciones defectuosas\n"M-play" para que el Marisco se mande un alto cumbion\nY "Danbooru:(Tag de danbooru)" para que el Marisco postee waifus en pelotas(NSFW)', 'Greetings mortals, the commands are as follows:\n"#Talk" to make Marisco answer\n"#OUTBEAST" to make Marisco angry at you\n"#Marisa" to hail Marisa\n"Hecatia" to make Marisco recognize her natural enemy\n"#OHIO" to greet Marisco\n"#Dango" to feed Marisco\n"#Spread Marisco" to spread the virus\n"#Waifu" to make Marisco clarify who\'s the best waifu\n"#Mokou" to make Marisco invoke chinkmemes with awful translations\n"M-play" to make Marisco play some nice traps\n"#8ball" to ask for Marisco\'s infinite wisdom about a yes or no question\nAnd "Danbooru: (Danbooru tag)" to make Marisco send waifu nudes(NSFW)']
 var MSummon = ["Invocar Marisco", "Summon Marisco"]; //Not documented, do not fix
 var MInvoked = ["Saludos mortales", "Greetings mortals"]; //Idem ^1
 var MError = ["Todo mal, arreglame puto", "Shit's fucked, something went wrong, really wrong"];
 var MStrike = ["OPORTUNIDAD ", "STRIKE "];
 var MNoGrasaHere = [", SOLTÁ EL ARMA PUTO TENÉS 20 SEGUNDOS", ", DROP YOUR WEAPON, YOU HAVE 20 SECONDS TO COMPLY"];
 var MNoPuto = [", DIJE SOLTÁ EL ARMA",", I SAID *DROP IT*"];
+var MYes = ["Sí, palabra del Marisco", "Yes, Marisco has spoken"];
+var MNo =  ["No, palabra del Marisco", "No, Marisco has spoken"];
 
 
 client.on('ready', () => {
@@ -91,6 +93,7 @@ client.on('message', msg => {
   if (msg.content === MMokou[LANG]) {var item = pho3[Math.floor(Math.random()*pho3.length)];msg.channel.sendFile(testFolder3+item);}
   if (msg.content === MHelp[LANG]) msg.reply(MCmds[LANG]);
   if (msg.content === MSummon[LANG]) {tc = msg.channel; msg.reply(MInvoked[LANG]);} 
+  if (msg.content.startsWith("#8ball")) {var rnd = Math.random() < 0.5; if(rnd){msg.reply(MNo[LANG]);};if(!rnd){msg.reply(MYes[LANG]);};}
   if (msg.content.startsWith('M-play')) {
 	var chan;
 	var msg_cut = msg.content.split(' ');
@@ -148,7 +151,7 @@ if(msg.content.indexOf(":v")!=-1)
 }
 
 });
-client.login('Discord key Here'); //Change this to your Discord key
+client.login('insertkeyhere'); //Change this to your Discord key
 
 rl.on('line', (input) => {
    if(tc != null){
@@ -175,8 +178,16 @@ function get_danbooru(tag) {
             var parsed = JSON.parse(body);
 	    var number = Math.floor(Math.random()*parsed.length);
 	    console.log(number);
-	    var id = parsed[number].id;
-            msg_to_reply.reply("https://danbooru.donmai.us/posts/"+id);
+
+	    if(typeof parsed[number] != 'undefined')
+	    {
+		    var id = parsed[number].id;
+	            msg_to_reply.reply("https://danbooru.donmai.us/posts/"+id);
+	    }
+	    else
+	    {
+		    msg_to_reply.reply("Your waifu remains unlewded. Feel free to lewd her yourself.");
+	    }
         });
     });
 
