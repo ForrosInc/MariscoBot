@@ -70,6 +70,7 @@ var MNoGrasaHere = [", SOLTÁ EL ARMA PUTO TENÉS 20 SEGUNDOS", ", DROP YOUR WEA
 var MNoPuto = [", DIJE SOLTÁ EL ARMA",", I SAID *DROP IT*"];
 var MYes = ["Sí, palabra del Marisco", "Yes, Marisco has spoken"];
 var MNo =  ["No, palabra del Marisco", "No, Marisco has spoken"];
+var MusQueue = [];
 
 
 client.on('ready', () => {
@@ -100,20 +101,27 @@ client.on('message', msg => {
 	msg_cut.splice(0,1);
 	msg_cut = msg_cut.join(' ');
 	chan = msg.channel.guild.channels.find('type', 'voice');
-	search(msg_cut, optsyt, function(err, results) {
-		if(err) msg.reply(MError[LANG] + err);
-		else
-		{
-			console.log(chan);
-			chan.join().then(connection => {
-				var stream = ytdl(results[0].link, {filter : 'audioonly'});
-				var dispatcher = connection.playStream(stream, streamOptions);
-                                var dispatcher = connection.playStream(stream, streamOptions);
-				dispatcher.once('end', () => {
-                                connection.disconnect();});
-			}).catch(console.error);
-		}});
-
+	MusQueue.push(msg_cut);
+	if(chan.connection == null)
+	{
+		while(MusQueue.length != 0){
+			search(MusQueue[0], optsyt, function(err, results) {
+				if(err) msg.reply(MError[LANG] + err);
+				else
+				{
+					console.log(chan);
+					chan.join().then(connection => {
+						var stream = ytdl(results[0].link, {filter : 'audioonly'});
+						var dispatcher = connection.playStream(stream, streamOptions);
+                	        	        var dispatcher = connection.playStream(stream, streamOptions);
+						dispatcher.once('end', () => {
+							MusQueue.splice(0,1);
+							connection.disconnect();
+						});
+					}).catch(console.error);
+				}});
+		}
+	}
   }
   if(msg.content.startsWith("Danbooru:"))
   {
