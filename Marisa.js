@@ -71,7 +71,7 @@ var MNoPuto = [", DIJE SOLTÁ EL ARMA",", I SAID *DROP IT*"];
 var MYes = ["Sí, palabra del Marisco", "Yes, Marisco has spoken"];
 var MNo =  ["No, palabra del Marisco", "No, Marisco has spoken"];
 var MusQueue = [];
-
+var MConn = false;
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.username}#${client.user.discriminator}`);
@@ -103,18 +103,19 @@ client.on('message', msg => {
 	chan = msg.channel.guild.channels.find('type', 'voice');
 	MusQueue.push(msg_cut);
 	console.log("Debug1");
-	if(chan.connection == null)
+	if(MConn == false)
 	{
 		console.log("Debug2");
 		while(MusQueue.length != 0){
 			console.log("Debug3");
-			if(chan.connection == null){
+			if(MConn == false){
 				console.log("Debug4");
 				search(MusQueue[0], optsyt, function(err, results) {
 					console.log("Debug5");
 					if(err) msg.reply(MError[LANG] + err);
 					else
 					{
+						MConn = true;
 						msg.reply("Currently playing " + results[0].title);
 						console.log(chan);
 						chan.join().then(connection => {
@@ -123,6 +124,7 @@ client.on('message', msg => {
 	                	        	        var dispatcher = connection.playStream(stream, streamOptions);
 							dispatcher.once('end', () => {
 								MusQueue.splice(0,1);
+								MConn = false;
 								connection.disconnect();
 										     });
 										}).catch(console.error);
