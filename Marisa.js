@@ -153,7 +153,11 @@ const commands = {
 	},
 };
 
-var emoji = ["\u0001F347", "\u0001F352", "\u0001F47A", "\u0001F349", "\u0001F34B", "7️⃣", "\u0001F514"];
+var emoji = [":grapes:", ":cherries:", ":japanese_goblin:", ":watermelon:", ":lemon:", ":seven:", ":bell:"];
+
+var emojivalue = [10, 20, 50, 30, 40, 100, 25];
+
+var emojipoints = {};
 
 const prefix = "M-"
 
@@ -179,7 +183,29 @@ client.on('message', msg => {
   if (msg.content === MMokou[LANG]) {var item = pho3[Math.floor(Math.random()*pho3.length)];msg.channel.sendFile(testFolder3+item);}
   if (msg.content === MHelp[LANG]) msg.reply(MCmds[LANG]);
   if (msg.content === MSummon[LANG]) {tc = msg.channel; msg.reply(MInvoked[LANG]);} 
-  if (msg.content === "#Emojilete") {var tremoji = emoji[Math.floor(Math.random()*emoji.length)] + " " + emoji[Math.floor(Math.random()*emoji.length)] + " " + emoji[Math.floor(Math.random()*emoji.length)]; msg.channel.sendMessage(tremoji);}
+  if (msg.content === "#Emojilete") {
+	var emo1 = Math.floor(Math.random()*emoji.length);
+	var emo2 = Math.floor(Math.random()*emoji.length);
+	var emo3 = Math.floor(Math.random()*emoji.length);
+	var tremoji = emoji[emo1] + " " + emoji[emo2] + " " + emoji[emo3];
+	var emoponts = emojivalue[emo1]+emojivalue[emo2]+emojivalue[emo3];
+	if(tremoji == ":seven: :seven: :seven:")
+	{
+		tremoji = tremoji + " JACKPOT!!!!";
+		emoponts = emoponts * 3;
+	}
+	msg.channel.sendMessage(tremoji);
+	msg.channel.sendMessage(msg.author.tag + " has won " + emoponts.toString() + " points!");
+	if (!emojipoints.hasOwnProperty(msg.author.id))
+	{
+		emojipoints[msg.author.id] = {};
+		emojipoints[msg.author.id].points = emoponts;
+	}
+	else
+	{
+		emojipoints[msg.author.id].points = emojipoints[msg.author.id].points + emoponts;
+	}
+  }
   if (msg.content.startsWith("#8ball")) {var rnd = Math.random() < 0.5; if(rnd){msg.reply(MNo[LANG]);};if(!rnd){msg.reply(MYes[LANG]);};}
   if (msg.content.startsWith("M-search:"))
   {
