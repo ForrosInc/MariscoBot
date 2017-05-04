@@ -19,4 +19,4 @@
 6. Report any bugs you may find
 
 ## Documentation
-[Online](https://forrosinc.github.io/MariscoBot/docs/), [PDF](https://forrosinc.github.io/MariscoBot/docs/Documentation.pdf), or [ePub](https://forrosinc.github.io/MariscoBot/docs/Documentation.epub) (source in "Documentation_LaTeX" folder)
+[Online](https://github.com/ForrosInc/MariscoBot/wiki)
