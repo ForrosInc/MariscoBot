@@ -105,22 +105,26 @@ client.on('message', msg => {
 	if(chan.connection == null)
 	{
 		while(MusQueue.length != 0){
-			search(MusQueue[0], optsyt, function(err, results) {
-				if(err) msg.reply(MError[LANG] + err);
-				else
-				{
-					console.log(chan);
-					chan.join().then(connection => {
-						var stream = ytdl(results[0].link, {filter : 'audioonly'});
-						var dispatcher = connection.playStream(stream, streamOptions);
-                	        	        var dispatcher = connection.playStream(stream, streamOptions);
-						dispatcher.once('end', () => {
-							MusQueue.splice(0,1);
-							connection.disconnect();
-						});
-					}).catch(console.error);
-				}});
+			if(chan.connection == null){
+				search(MusQueue[0], optsyt, function(err, results) {
+					if(err) msg.reply(MError[LANG] + err);
+					else
+					{
+						console.log(chan);
+						chan.join().then(connection => {
+							var stream = ytdl(results[0].link, {filter : 'audioonly'});
+							var dispatcher = connection.playStream(stream, streamOptions);
+	                	        	        var dispatcher = connection.playStream(stream, streamOptions);
+							dispatcher.once('end', () => {
+								MusQueue.splice(0,1);
+								connection.disconnect();
+										     });
+										}).catch(console.error);
+					}
+										   });
+			}
 		}
+
 	}
   }
   if(msg.content.startsWith("Danbooru:"))
