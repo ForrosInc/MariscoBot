@@ -71,7 +71,7 @@ var MNoGrasaHere = [", SOLTÁ EL ARMA PUTO TENÉS 20 SEGUNDOS", ", DROP YOUR WEA
 var MNoPuto = [", DIJE SOLTÁ EL ARMA",", I SAID *DROP IT*"];
 var MYes = ["Sí, palabra del Marisco", "Yes, Marisco has spoken"];
 var MNo =  ["No, palabra del Marisco", "No, Marisco has spoken"];
-let Queue = [];
+var Queue = {};
 var MConn = false;
 
 
