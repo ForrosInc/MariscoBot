@@ -178,59 +178,14 @@ client.on('message', msg => {
   if (msg.content === MHelp[LANG]) msg.reply(MCmds[LANG]);
   if (msg.content === MSummon[LANG]) {tc = msg.channel; msg.reply(MInvoked[LANG]);} 
   if (msg.content.startsWith("#8ball")) {var rnd = Math.random() < 0.5; if(rnd){msg.reply(MNo[LANG]);};if(!rnd){msg.reply(MYes[LANG]);};}
-  if (msg.content.startsWith('M-play')) {
-	var chan;
-	var msg_cut = msg.content.split(' ');
-	msg_cut.splice(0,1);
-	msg_cut = msg_cut.join(' ');
-	chan = msg.channel.guild.channels.find('type', 'voice');
-	MusQueue.push(msg_cut);
-	console.log("Debug1");
-	if(MConn == false)
-	{
-		console.log("Debug2");
-		while(MusQueue.length != 0){
-			console.log("Debug3");
-			if(MConn == false){
-				console.log("Debug4");
-				search(MusQueue[0], optsyt, function(err, results) {
-					console.log("Debug5");
-					if(err) msg.reply(MError[LANG] + err);
-					else
-					{
-						MConn = true;
-						msg.reply("Currently playing " + results[0].title);
-						console.log(chan);
-						chan.join().then(connection => {
-							var stream = ytdl(results[0].link, {filter : 'audioonly'});
-							var dispatcher = connection.playStream(stream, streamOptions);
-	                	        	        var dispatcher = connection.playStream(stream, streamOptions);
-							dispatcher.once('end', () => {
-								MusQueue.splice(0,1);
-								MConn = false;
-								connection.disconnect();
-										     });
-										}).catch(console.error);
-					}
-										   });
-			}
-		}
-
-	}
-	else
-	{
-		msg.reply("Added " + msg_cut + "to queue");
-	}
-  }
-  if(msg.content.startsWith("Danbooru:"))
+  if (msg.content.startsWith("Danbooru:"))
   {
 	var tag = msg.content.split(':').pop();
 	msg_to_reply = msg;
 	get_danbooru(tag);
   }
-if(msg.content.indexOf(":v")!=-1)
-
-{
+  if(msg.content.indexOf(":v")!=-1)
+  {
 	var usr_ind = find_user(user_array,msg.member.id);
 	if(usr_ind == -1)
 	{
