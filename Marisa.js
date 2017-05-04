@@ -183,6 +183,16 @@ client.on('message', msg => {
   if (msg.content === MMokou[LANG]) {var item = pho3[Math.floor(Math.random()*pho3.length)];msg.channel.sendFile(testFolder3+item);}
   if (msg.content === MHelp[LANG]) msg.reply(MCmds[LANG]);
   if (msg.content === MSummon[LANG]) {tc = msg.channel; msg.reply(MInvoked[LANG]);} 
+  if (msg.content === "#Emopoints") {
+	if(emojipoints.hasOwnProperty(msg.author.id))
+	{
+		msg.reply("You have " + emojipoints[msg.author.id].points.toString() + " points.");
+	}
+	else
+	{
+		msg.reply("Marisa cannot find your ID in the list. Maybe you need to git gud and play roulette?");
+	}
+  }
   if (msg.content === "#Emojilete") {
 	var emo1 = Math.floor(Math.random()*emoji.length);
 	var emo2 = Math.floor(Math.random()*emoji.length);
@@ -195,7 +205,7 @@ client.on('message', msg => {
 		emoponts = emoponts * 3;
 	}
 	msg.channel.sendMessage(tremoji);
-	msg.channel.sendMessage(msg.author.tag + " has won " + emoponts.toString() + " points!");
+	msg.channel.sendMessage(msg.author.username + " has won " + emoponts.toString() + " points!");
 	if (!emojipoints.hasOwnProperty(msg.author.id))
 	{
 		emojipoints[msg.author.id] = {};
