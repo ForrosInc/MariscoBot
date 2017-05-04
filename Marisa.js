@@ -133,7 +133,7 @@ const commands = {
 	},
 	'add': (msg) => {
 		let url = msg.content.split(' ')[1];
-		if (url == '' || url === undefined) return msg.channel.sendMessage(`You must add a YouTube video url, or id after ${prefix}add`);
+		if (url == '' || url === undefined || url.startsWith("http:") != true || url.includes("youtube") != true) return msg.channel.sendMessage(`You must add a YouTube video url, or id after ${prefix}add`);
 		ytdl.getInfo(url, (err, info) => {
 			if(err) return msg.channel.sendMessage('Invalid YouTube Link: ' + err);
 			if (!queue.hasOwnProperty(msg.guild.id)) queue[msg.guild.id] = {}, queue[msg.guild.id].playing = false, queue[msg.guild.id].songs = [];
