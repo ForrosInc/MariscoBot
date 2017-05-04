@@ -102,11 +102,16 @@ client.on('message', msg => {
 	msg_cut = msg_cut.join(' ');
 	chan = msg.channel.guild.channels.find('type', 'voice');
 	MusQueue.push(msg_cut);
+	console.log("Debug1");
 	if(chan.connection == null)
 	{
+		console.log("Debug2");
 		while(MusQueue.length != 0){
+			console.log("Debug3");
 			if(chan.connection == null){
+				console.log("Debug4");
 				search(MusQueue[0], optsyt, function(err, results) {
+					console.log("Debug5");
 					if(err) msg.reply(MError[LANG] + err);
 					else
 					{
