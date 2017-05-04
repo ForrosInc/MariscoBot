@@ -153,6 +153,8 @@ const commands = {
 	},
 };
 
+var qu_chan;
+
 const prefix = "M-"
 
 client.on('ready', () => {
@@ -178,6 +180,17 @@ client.on('message', msg => {
   if (msg.content === MHelp[LANG]) msg.reply(MCmds[LANG]);
   if (msg.content === MSummon[LANG]) {tc = msg.channel; msg.reply(MInvoked[LANG]);} 
   if (msg.content.startsWith("#8ball")) {var rnd = Math.random() < 0.5; if(rnd){msg.reply(MNo[LANG]);};if(!rnd){msg.reply(MYes[LANG]);};}
+  if (msg.content.startsWith("M-search:"))
+  {
+	var srch = msg.content.split(':').pop();
+	qu_chan = msg.channel;
+	search(srch,optsyt,function(err,results) {
+		if(err) console.log(err);
+		else{
+			qu_chan.send("M-add " + results[0].link);
+		}
+	});
+  }
   if (msg.content.startsWith("Danbooru:"))
   {
 	var tag = msg.content.split(':').pop();
