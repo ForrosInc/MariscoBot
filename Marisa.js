@@ -183,11 +183,10 @@ client.on('message', msg => {
   if (msg.content.startsWith("M-search:"))
   {
 	var srch = msg.content.split(':').pop();
-	qu_chan = msg.channel;
 	search(srch,optsyt,function(err,results) {
 		if(err) console.log(err);
 		else{
-			qu_chan.send("M-add " + results[0].link);
+			msg.channel.sendMessage("M-add " + results[0].link);
 		}
 	});
   }
