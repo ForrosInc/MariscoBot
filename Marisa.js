@@ -70,7 +70,7 @@ var MNoGrasaHere = [", SOLTÁ EL ARMA PUTO TENÉS 20 SEGUNDOS", ", DROP YOUR WEA
 var MNoPuto = [", DIJE SOLTÁ EL ARMA",", I SAID *DROP IT*"];
 var MYes = ["Sí, palabra del Marisco", "Yes, Marisco has spoken"];
 var MNo =  ["No, palabra del Marisco", "No, Marisco has spoken"];
-var MusQueue = [];
+let MusQueue = [];
 var MConn = false;
 
 client.on('ready', () => {
@@ -107,7 +107,6 @@ client.on('message', msg => {
 	{
 		console.log("Debug2");
 		while(MusQueue.length != 0){
-		setTimeout(function() {
 			console.log("Debug3");
 			if(MConn == false){
 				console.log("Debug4");
@@ -132,7 +131,6 @@ client.on('message', msg => {
 					}
 										   });
 			}
-		}, (2*1000));
 		}
 
 	}
