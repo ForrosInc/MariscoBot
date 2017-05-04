@@ -179,7 +179,7 @@ client.on('message', msg => {
   if (msg.content === MMokou[LANG]) {var item = pho3[Math.floor(Math.random()*pho3.length)];msg.channel.sendFile(testFolder3+item);}
   if (msg.content === MHelp[LANG]) msg.reply(MCmds[LANG]);
   if (msg.content === MSummon[LANG]) {tc = msg.channel; msg.reply(MInvoked[LANG]);} 
-  if (msg.content === "#Emojilete") {var tremoji = emoji[Math.floor(Math.random()*emoji.length)] + " " + emoji[Math.floor(Math.random()*emoji.length)] + " " + emoji[Math.floor(Math.random()*emoji.length)]; msg.channel.send(tremoji);}
+  if (msg.content === "#Emojilete") {var tremoji = emoji[Math.floor(Math.random()*emoji.length)] + " " + emoji[Math.floor(Math.random()*emoji.length)] + " " + emoji[Math.floor(Math.random()*emoji.length)]; msg.channel.sendMessage(tremoji);}
   if (msg.content.startsWith("#8ball")) {var rnd = Math.random() < 0.5; if(rnd){msg.reply(MNo[LANG]);};if(!rnd){msg.reply(MYes[LANG]);};}
   if (msg.content.startsWith("M-search:"))
   {
