@@ -107,6 +107,7 @@ client.on('message', msg => {
 	{
 		console.log("Debug2");
 		while(MusQueue.length != 0){
+		setTimeout(function() {
 			console.log("Debug3");
 			if(MConn == false){
 				console.log("Debug4");
@@ -131,6 +132,7 @@ client.on('message', msg => {
 					}
 										   });
 			}
+		}, (2*1000));
 		}
 
 	}
