@@ -110,6 +110,7 @@ client.on('message', msg => {
 					if(err) msg.reply(MError[LANG] + err);
 					else
 					{
+						msg.reply("Currently playing " + results[0].title);
 						console.log(chan);
 						chan.join().then(connection => {
 							var stream = ytdl(results[0].link, {filter : 'audioonly'});
@@ -125,6 +126,10 @@ client.on('message', msg => {
 			}
 		}
 
+	}
+	else
+	{
+		msg.reply("Added " + msg_cut + "to queue");
 	}
   }
   if(msg.content.startsWith("Danbooru:"))
