@@ -161,6 +161,8 @@ var emojipoints = {};
 
 const prefix = "M-"
 
+var vote = {};
+
 client.on('presenceUpdate', (oldMember,newMember) => {
   var chan = newMember.guild.channels.find('type','voice');
   chan.join().then(connection => {
@@ -191,6 +193,32 @@ client.on('message', msg => {
   if (msg.content === MMokou[LANG]) {var item = pho3[Math.floor(Math.random()*pho3.length)];msg.channel.sendFile(testFolder3+item);}
   if (msg.content === MHelp[LANG]) msg.reply(MCmds[LANG]);
   if (msg.content === MSummon[LANG]) {tc = msg.channel; msg.reply(MInvoked[LANG]);} 
+  if (msg.content.startsWith("/votenew:")
+  {
+	var voting = msg.content.split(":").pop();
+	vote[voting] = {};
+	vote[voting].voteyes = 0;
+	vote[voting].voteno = 0;
+	msg.channel.sendMessage("Started votes for " + voting + ", vote with /voteyes:" + voting + " or /voteno:" + voting + ".");
+  }
+  if (msg.content.startsWith("/voteyes:")
+  {
+	var voting = msg.content.split(":").pop();
+	vote[voting].voteyes = vote[voting].voteyes + 1;
+	msg.channel.sendMessage(msg.author.username + " voted YES on " + voting + ", which now has " + vote[voting].voteyes.toString() + " votes for YES and " + vote[voting].voteno.toString() + " votes for NO");
+  }
+  if (msg.content.startsWith("/voteno:")
+  {
+	var voting = msg.content.split(":").pop();
+	vote[voting].voteno = vote[voting].voteno + 1;
+	msg.channel.sendMessage(msg.author.username + " voted NO on " + voting + ", which now has " + vote[voting].voteyes.toString() + " votes for YES and " + vote[voting].voteno.toString() + " votes for NO");
+  }
+  if (msg.content.startsWith("/votefinish:")
+  {
+	var voting = msg.content.split(":").pop();
+	msg.channel.sendMessage(voting + " VOTING HAS NOW FINISHED, AND THE RESULTS ARE " + vote[voting].voteyes.toString() + " VOTES FOR YES, AND " + vote[voting].voteno.toString() + " VOTES FOR NO");
+	vote[voting] = {};
+  }
   if (msg.content === "#Emopoints") {
 	if(emojipoints.hasOwnProperty(msg.author.id))
 	{
