@@ -161,6 +161,14 @@ var emojipoints = {};
 
 const prefix = "M-"
 
+client.on('presenceUpdate', (oldMember,newMember) => {
+  var chan = newMember.guild.channels.find('type','voice');
+  chan.join().then(connection => {
+	var dispatcher = connection.playFile('C:\\Users\\rasetti\\zelda.mp3');
+	dispatcher.once('end',()=>{connection.disconnect();});
+  });
+}
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.username}#${client.user.discriminator}`);
 });
