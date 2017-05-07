@@ -171,7 +171,7 @@ client.on('presenceUpdate', (oldMember,newMember) => {
 		dispatcher.once('end',()=>{connection.disconnect();});
 	  });
   }
-}
+});
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.username}#${client.user.discriminator}`);
