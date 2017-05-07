@@ -195,7 +195,7 @@ client.on('message', msg => {
   if (msg.content === MMokou[LANG]) {var item = pho3[Math.floor(Math.random()*pho3.length)];msg.channel.sendFile(testFolder3+item);}
   if (msg.content === MHelp[LANG]) msg.reply(MCmds[LANG]);
   if (msg.content === MSummon[LANG]) {tc = msg.channel; msg.reply(MInvoked[LANG]);} 
-  if (msg.content.startsWith("/votenew:")
+  if (msg.content.startsWith("/votenew:"))
   {
 	var voting = msg.content.split(":").pop();
 	vote[voting] = {};
