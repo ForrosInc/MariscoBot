@@ -203,19 +203,19 @@ client.on('message', msg => {
 	vote[voting].voteno = 0;
 	msg.channel.sendMessage("Started votes for " + voting + ", vote with /voteyes:" + voting + " or /voteno:" + voting + ".");
   }
-  if (msg.content.startsWith("/voteyes:")
+  if (msg.content.startsWith("/voteyes:"))
   {
 	var voting = msg.content.split(":").pop();
 	vote[voting].voteyes = vote[voting].voteyes + 1;
 	msg.channel.sendMessage(msg.author.username + " voted YES on " + voting + ", which now has " + vote[voting].voteyes.toString() + " votes for YES and " + vote[voting].voteno.toString() + " votes for NO");
   }
-  if (msg.content.startsWith("/voteno:")
+  if (msg.content.startsWith("/voteno:"))
   {
 	var voting = msg.content.split(":").pop();
 	vote[voting].voteno = vote[voting].voteno + 1;
 	msg.channel.sendMessage(msg.author.username + " voted NO on " + voting + ", which now has " + vote[voting].voteyes.toString() + " votes for YES and " + vote[voting].voteno.toString() + " votes for NO");
   }
-  if (msg.content.startsWith("/votefinish:")
+  if (msg.content.startsWith("/votefinish:"))
   {
 	var voting = msg.content.split(":").pop();
 	msg.channel.sendMessage(voting + " VOTING HAS NOW FINISHED, AND THE RESULTS ARE " + vote[voting].voteyes.toString() + " VOTES FOR YES, AND " + vote[voting].voteno.toString() + " VOTES FOR NO");
