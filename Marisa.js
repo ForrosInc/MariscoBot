@@ -165,7 +165,7 @@ var vote = {};
 
 client.on('presenceUpdate', (oldMember,newMember) => {
   var chan = newMember.guild.channels.find('type','voice');
-  if(a != null){
+  if(chan != null){
 	  chan.join().then(connection => {
 		var dispatcher = connection.playFile('C:\\Users\\rasetti\\zelda.mp3');
 		dispatcher.once('end',()=>{connection.disconnect();});
