@@ -165,10 +165,12 @@ var vote = {};
 
 client.on('presenceUpdate', (oldMember,newMember) => {
   var chan = newMember.guild.channels.find('type','voice');
-  chan.join().then(connection => {
-	var dispatcher = connection.playFile('C:\\Users\\rasetti\\zelda.mp3');
-	dispatcher.once('end',()=>{connection.disconnect();});
-  });
+  if(a != null){
+	  chan.join().then(connection => {
+		var dispatcher = connection.playFile('C:\\Users\\rasetti\\zelda.mp3');
+		dispatcher.once('end',()=>{connection.disconnect();});
+	  });
+  }
 }
 
 client.on('ready', () => {
