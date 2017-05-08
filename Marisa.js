@@ -162,17 +162,17 @@ var emojipoints = {};
 const prefix = "M-"
 
 var vote = {};
-
-client.on('presenceUpdate', (oldMember,newMember) => {
-  var chan = newMember.guild.channels.find('type','voice');
-  if(chan != null){
+/*
+client.on('presenceUpdate', (oldMember,newMember) => {			*
+  var chan = newMember.guild.channels.find('type','voice');		* Very bad ideaTM
+  if(chan != null){							*
 	  chan.join().then(connection => {
 		var dispatcher = connection.playFile('C:\\Users\\rasetti\\zelda.mp3');
 		dispatcher.once('end',()=>{connection.disconnect();});
 	  });
   }
 });
-
+*/
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.username}#${client.user.discriminator}`);
 });
