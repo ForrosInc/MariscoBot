@@ -1,6 +1,6 @@
 ﻿#!/usr/bin/env node
-//MariscoBot is under the GPL3+ License
-//Copyright (C) Bruno Rasetti and Salvador Pardiñas 2016-2017
+//MariscoBot is under the GPL3+ License (except MIT code by bdistin)
+//Copyright (C) Bruno Rasetti and Salvador Pardiñas 2016-2017 (see above)
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
@@ -74,7 +74,7 @@ var MNo =  ["No, palabra del Marisco", "No, Marisco has spoken"];
 var queue = {};
 var MConn = false;
 
-
+/* MIT licensed code by github.com/bdistin starts here */
 const commands = {
 	'play': (msg) => {
 		if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`Add some songs to the queue first with ${prefix}add`);
@@ -152,6 +152,7 @@ const commands = {
 		msg.channel.sendMessage(tosend.join('\n'));
 	},
 };
+/* MIT licensed code ends here */
 
 var emoji = [":grapes:", ":cherries:", ":japanese_goblin:", ":watermelon:", ":lemon:", ":seven:", ":bell:"];
 
